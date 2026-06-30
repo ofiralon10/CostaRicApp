@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { differenceInDays, differenceInHours, differenceInMinutes, format, isAfter, isBefore, parseISO } from 'date-fns'
-import { he } from 'date-fns/locale'
 import { Plane, MapPin, Hotel, Sun } from 'lucide-react'
 import { useLang } from '../context/LanguageContext'
 import { itinerary } from '../data/itinerary'
@@ -10,7 +9,7 @@ const DEPARTURE = '2026-07-23T05:30:00+03:00'
 const TRIP_END = '2026-08-10T22:50:00+03:00'
 
 export default function HomePage() {
-  const { t, lang } = useLang()
+  const { t } = useLang()
   const now = new Date()
   const departureDate = new Date(DEPARTURE)
   const tripEnd = new Date(TRIP_END)

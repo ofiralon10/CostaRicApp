@@ -27,7 +27,7 @@ const typeLabels = {
 }
 
 export default function EmergencyPage() {
-  const { t, lang } = useLang()
+  const { t } = useLang()
 
   const grouped = emergencyContacts.reduce(
     (acc, c) => {

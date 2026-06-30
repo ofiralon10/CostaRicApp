@@ -97,7 +97,6 @@ All 6 pages are built and functional:
 - Packing checklist
 - Spanish phrasebook
 - PWA manifest + service worker for offline
-- Firebase Hosting deployment
 - Budget tracker
 - Document vault (passports, insurance, bookings)
 
@@ -109,7 +108,14 @@ Based on the Thailand trip app by Ran Aviv (ranaviv.com/thailand-trip-app):
 - Weather module with hand-drawn icons
 - Document vault with offline access
 
+## Deployment
+- **Live URL:** https://costaricapp-2026.web.app
+- **Firebase project:** costaricapp-2026
+- **Hosting:** Firebase Hosting, deploy with `npm run build && firebase deploy --only hosting`
+- **GitHub repo:** github.com/ofiralon10/CostaRicApp
+
 ## Important Notes
+- Always update this CLAUDE.md file when making changes — user switches between PC and mobile sessions
 - `verbatimModuleSyntax` is enabled in tsconfig — use `import type` for type-only imports
 - The app uses `date-fns` with Hebrew locale support
 - All data is typed in `src/data/types.ts`

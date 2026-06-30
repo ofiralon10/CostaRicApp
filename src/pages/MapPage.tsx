@@ -9,10 +9,6 @@ export default function MapPage() {
   const costaRicaHotels = hotels.filter(h => h.region !== 'Madrid')
   const madridHotels = hotels.filter(h => h.region === 'Madrid')
 
-  const allPoints = costaRicaHotels.map(h => h.coordinates)
-  const centerLat = allPoints.reduce((s, c) => s + c[0], 0) / allPoints.length
-  const centerLng = allPoints.reduce((s, c) => s + c[1], 0) / allPoints.length
-
   const googleMapsUrl = `https://www.google.com/maps/dir/${costaRicaHotels.map(h => `${h.coordinates[0]},${h.coordinates[1]}`).join('/')}`
 
   return (
