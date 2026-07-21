@@ -63,6 +63,8 @@ export interface Destination {
   highlights: string[]
   highlightsHe: string[]
   image: string
+  imageUrl?: string
+  podcastUrl?: string
   coordinates: [number, number]
   days: number[]
 }

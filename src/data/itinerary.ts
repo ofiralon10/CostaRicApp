@@ -13,15 +13,15 @@ export const itinerary: DayPlan[] = [
     activities: [
       {
         id: 'a1-1',
-        name: 'Flight TLV → Madrid (IB1874)',
-        nameHe: 'טיסה תל אביב → מדריד (IB1874)',
-        description: 'Depart 05:30, arrive 09:55',
-        descriptionHe: 'המראה 05:30, נחיתה 09:55',
+        name: 'Flight TLV → Madrid (El Al LY395)',
+        nameHe: 'טיסה תל אביב ← מדריד (אל על LY395)',
+        description: 'Depart 05:00, arrive 09:20',
+        descriptionHe: 'המראה 05:00, נחיתה 09:20',
       },
       {
         id: 'a1-2',
         name: 'Flight Madrid → San José (IB243)',
-        nameHe: 'טיסה מדריד → סן חוסה (IB243)',
+        nameHe: 'טיסה מדריד ← סן חוסה (IB243)',
         description: 'Depart 11:30, arrive 14:35',
         descriptionHe: 'המראה 11:30, נחיתה 14:35',
       },
@@ -44,6 +44,13 @@ export const itinerary: DayPlan[] = [
     checkIn: true,
     drivingDistance: '150 km (~3 hours)',
     activities: [
+      {
+        id: 'a2-0',
+        name: 'Forest walk & Poás Volcano National Park',
+        nameHe: 'טיול ביער ופארק הר הגעש פואס',
+        costPerPerson: 17,
+        mapsUrl: 'https://maps.google.com/?q=Poas+Volcano+National+Park',
+      },
       {
         id: 'a2-1',
         name: 'Visit La Tirimbina Reserve (en route)',
@@ -97,9 +104,9 @@ export const itinerary: DayPlan[] = [
     activities: [
       {
         id: 'a4-1',
-        name: 'Canyoning Adventure',
-        nameHe: 'הרפתקת קניונינג',
-        costPerPerson: 100,
+        name: 'Morning Horseback riding',
+        nameHe: 'רכיבה על סוסים בבוקר',
+        costPerPerson: 95,
       },
       {
         id: 'a4-2',
@@ -137,8 +144,8 @@ export const itinerary: DayPlan[] = [
       },
       {
         id: 'a5-2',
-        name: 'Horseback riding near the park',
-        nameHe: 'רכיבה על סוסים ליד הפארק',
+        name: 'Tubing tour in Rio Celeste',
+        nameHe: 'טיובינג בריו סלסטה',
         costPerPerson: 50,
       },
     ],
@@ -235,9 +242,16 @@ export const itinerary: DayPlan[] = [
     hotelId: 'h5',
     activities: [
       {
+        id: 'a10-0',
+        name: 'Visit Biesanz Beach',
+        nameHe: 'ביקור בחוף ביסנס',
+        mapsUrl: 'https://maps.google.com/?q=Playa+Biesanz',
+      },
+      {
         id: 'a10-1',
-        name: 'Catamaran tour / Jet ski / Whale watching',
-        nameHe: 'טיול קטמרן / אופנועי ים / צפייה בלוויתנים',
+        name: 'Afternoon Catamaran Tour',
+        nameHe: 'שייט קטמרן אחה"צ',
+        costPerPerson: 95,
       },
     ],
   },
@@ -299,9 +313,9 @@ export const itinerary: DayPlan[] = [
     activities: [
       {
         id: 'a13-1',
-        name: 'Horseback ride to Nauyaca Waterfalls',
-        nameHe: 'רכיבה על סוסים למפלי נאויאקה',
-        costPerPerson: 80,
+        name: '4x4 ride to Nauyaca Waterfalls (incl. traditional lunch)',
+        nameHe: 'טיול 4x4 למפלי נאויאקה (כולל ארוחה מסורתית)',
+        costPerPerson: 35,
         mapsUrl: 'https://maps.google.com/?q=Nauyaca+Waterfalls',
       },
     ],
@@ -342,7 +356,7 @@ export const itinerary: DayPlan[] = [
       {
         id: 'a15-2',
         name: 'Flight SJO → Madrid (IB244) 16:10',
-        nameHe: 'טיסה סן חוסה → מדריד (IB244) 16:10',
+        nameHe: 'טיסה סן חוסה ← מדריד (IB244) 16:10',
       },
     ],
   },
@@ -389,10 +403,10 @@ export const itinerary: DayPlan[] = [
     activities: [
       {
         id: 'a19-1',
-        name: 'Flight Madrid → Tel Aviv (IB1873) 17:00',
-        nameHe: 'טיסה מדריד → תל אביב (IB1873) 17:00',
-        description: 'Arrive 22:50',
-        descriptionHe: 'נחיתה 22:50',
+        name: 'Flight Madrid → Tel Aviv (El Al LY398) 22:50',
+        nameHe: 'טיסה מדריד ← תל אביב (אל על LY398) 22:50',
+        description: 'Arrive 04:25 (+1 day, Aug 11)',
+        descriptionHe: 'נחיתה 04:25 (למחרת, 11 באוג׳)',
       },
     ],
   },

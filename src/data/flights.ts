@@ -3,12 +3,12 @@ import type { Flight } from './types'
 export const flights: Flight[] = [
   {
     id: 'f1',
-    airline: 'Iberia',
-    flightNumber: 'IB1874',
+    airline: 'El Al',
+    flightNumber: 'LY395',
     from: 'Tel Aviv (TLV)',
     to: 'Madrid (MAD)',
-    departure: '05:30',
-    arrival: '09:55',
+    departure: '05:00',
+    arrival: '09:20',
     date: '2026-07-23',
   },
   {
@@ -33,12 +33,12 @@ export const flights: Flight[] = [
   },
   {
     id: 'f4',
-    airline: 'Iberia',
-    flightNumber: 'IB1873',
+    airline: 'El Al',
+    flightNumber: 'LY398',
     from: 'Madrid (MAD)',
     to: 'Tel Aviv (TLV)',
-    departure: '17:00',
-    arrival: '22:50',
+    departure: '22:50',
+    arrival: '04:25+1',
     date: '2026-08-10',
   },
 ]

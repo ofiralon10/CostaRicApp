@@ -1,14 +1,30 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { format, parseISO } from 'date-fns'
 import { he } from 'date-fns/locale'
 import { MapPin, Car, ChevronDown, ChevronUp, DollarSign, ExternalLink } from 'lucide-react'
 import { useLang } from '../context/LanguageContext'
-import { itinerary } from '../data/itinerary'
+import { useAuth } from '../context/AuthContext'
+import { itinerary as defaultItinerary } from '../data/itinerary'
 import { hotels } from '../data/hotels'
+import { useSharedState } from '../hooks/useSharedState'
+import type { DayPlan } from '../data/types'
 
 export default function ItineraryPage() {
   const { t, lang } = useLang()
-  const [expandedDay, setExpandedDay] = useState<number | null>(null)
+  const { isParent } = useAuth()
+  const location = useLocation()
+  const scrollTarget = (location.state as { scrollTo?: number })?.scrollTo ?? null
+  const [expandedDay, setExpandedDay] = useState<number | null>(scrollTarget)
+  const [storedItinerary] = useSharedState<DayPlan[] | null>('itinerary', null)
+  const itinerary = storedItinerary ?? defaultItinerary
+  const dayRefs = useRef<Record<number, HTMLElement | null>>({})
+
+  useEffect(() => {
+    if (scrollTarget && dayRefs.current[scrollTarget]) {
+      dayRefs.current[scrollTarget]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [scrollTarget])
 
   const toggle = (day: number) => setExpandedDay(prev => (prev === day ? null : day))
 
@@ -40,7 +56,7 @@ export default function ItineraryPage() {
           const color = regionColors[day.region] || '#64748b'
 
           return (
-            <div key={day.day} className="timeline-item" onClick={() => toggle(day.day)}>
+            <div key={day.day} className="timeline-item" ref={el => { dayRefs.current[day.day] = el }} onClick={() => toggle(day.day)}>
               <div className="timeline-marker" style={{ backgroundColor: color }} />
               <div className="timeline-line" />
 
@@ -89,7 +105,7 @@ export default function ItineraryPage() {
                             {a.description && (
                               <span className="activity-desc">{t(a.descriptionHe || a.description, a.description)}</span>
                             )}
-                            {(a.costPerPerson || a.costTotal) && (
+                            {isParent && (a.costPerPerson || a.costTotal) && (
                               <span className="activity-cost">
                                 <DollarSign size={12} />
                                 {a.costPerPerson
@@ -108,7 +124,7 @@ export default function ItineraryPage() {
                         <div>
                           <span className="hotel-badge-name">{hotel.name}</span>
                           <span className="hotel-badge-detail">
-                            {t(`${hotel.nights} לילות · ארוחת בוקר כלולה`, `${hotel.nights} night${hotel.nights > 1 ? 's' : ''} · Breakfast included`)}
+                            {t(`${hotel.nights} ${hotel.nights === 1 ? 'לילה' : 'לילות'} · ארוחת בוקר כלולה`, `${hotel.nights} night${hotel.nights > 1 ? 's' : ''} · Breakfast included`)}
                           </span>
                         </div>
                       </div>

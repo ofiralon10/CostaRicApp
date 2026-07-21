@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
-import { Home, CalendarDays, Map, Hotel, Compass, Phone, Globe } from 'lucide-react'
+import { Home, CalendarDays, Map, Hotel, Compass, Phone, Globe, LogOut, X } from 'lucide-react'
 import { useLang } from '../context/LanguageContext'
+import { useAuth } from '../context/AuthContext'
+import { APP_VERSION } from '../version'
 
 const navItems = [
   { to: '/', icon: Home, labelHe: 'בית', labelEn: 'Home' },
@@ -13,16 +16,52 @@ const navItems = [
 
 export default function Layout() {
   const { t, toggleLang, lang } = useLang()
+  const { member, logout } = useAuth()
+  const [showProfile, setShowProfile] = useState(false)
 
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1 className="app-title">🇨🇷 {t('קוסטה ריקה', 'Costa Rica')} 2026</h1>
-        <button className="lang-toggle" onClick={toggleLang} aria-label="Toggle language">
-          <Globe size={18} />
-          <span>{lang === 'he' ? 'EN' : 'עב'}</span>
-        </button>
+        <div className="app-title-wrap">
+          <h1 className="app-title">🇨🇷 {t('קוסטה ריקה', 'Costa Rica')} 2026</h1>
+          <span className="app-version">v{APP_VERSION}</span>
+        </div>
+        <div className="header-actions">
+          {member && (
+            <img
+              className="user-badge-avatar"
+              src={member.avatar}
+              alt={member.nameEn}
+              title={member.nameEn}
+              onClick={() => setShowProfile(true)}
+              style={{ cursor: 'pointer' }}
+            />
+          )}
+          <button className="lang-toggle" onClick={toggleLang} aria-label="Toggle language">
+            <Globe size={18} />
+            <span>{lang === 'he' ? 'EN' : 'עב'}</span>
+          </button>
+          {member && (
+            <button className="lang-toggle" onClick={() => { logout() }} aria-label="Sign out">
+              <LogOut size={18} />
+            </button>
+          )}
+        </div>
       </header>
+
+      {showProfile && member && (
+        <div className="profile-modal-overlay" onClick={() => setShowProfile(false)}>
+          <div className="profile-modal" onClick={e => e.stopPropagation()}>
+            <img className="profile-modal-avatar" src={member.avatar} alt={member.nameEn} />
+            <h2 className="profile-modal-greeting">
+              {t(`היי, ${member.name}!`, `Hi, ${member.nameEn}!`)} {member.emoji}
+            </h2>
+            <button className="game-btn" onClick={() => setShowProfile(false)}>
+              <X size={16} /> {t('סגור', 'Close')}
+            </button>
+          </div>
+        </div>
+      )}
 
       <main className="app-main">
         <Outlet />
