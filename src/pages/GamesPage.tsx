@@ -128,16 +128,75 @@ function shuffleString(str: string): string {
 }
 
 const scrambleWords: Omit<ScrambleWord, 'scrambled'>[] = [
+  // Wildlife
   { word: 'QUETZAL', wordEn: 'קצאל', hint: 'ציפור קדושה למאיה', hintEn: 'Sacred bird of the Maya' },
-  { word: 'ARENAL', wordEn: 'ארנל', hint: 'הר געש מפורסם', hintEn: 'Famous volcano' },
   { word: 'TOUCAN', wordEn: 'טוקן', hint: 'ציפור עם מקור ענק', hintEn: 'Bird with a giant beak' },
   { word: 'JAGUAR', wordEn: 'יגואר', hint: 'החתול הגדול ביותר באמריקה', hintEn: 'Largest cat in the Americas' },
   { word: 'SLOTH', wordEn: 'עצלן', hint: 'החיה האיטית ביותר', hintEn: 'The slowest animal' },
-  { word: 'CORCOVADO', wordEn: 'קורקובדו', hint: 'פארק לאומי עם 2.5% מהמגוון הביולוגי', hintEn: 'National park with 2.5% of world biodiversity' },
-  { word: 'TAPIR', wordEn: 'טפיר', hint: 'מאובן חי — קיים 20 מיליון שנה', hintEn: 'Living fossil — existed for 20 million years' },
-  { word: 'MONTEVERDE', wordEn: 'מונטה ורדה', hint: 'יער ענן מפורסם', hintEn: 'Famous cloud forest' },
+  { word: 'TAPIR', wordEn: 'טפיר', hint: 'מאובן חי — קיים 20 מיליון שנה', hintEn: 'Living fossil — existed 20 million years' },
   { word: 'MACAW', wordEn: 'מקאו', hint: 'תוכי אדום גדול', hintEn: 'Large red parrot' },
   { word: 'CAPUCHIN', wordEn: 'קפוצ\'ין', hint: 'הקוף החכם ביותר בקוסטה ריקה', hintEn: 'The smartest monkey in Costa Rica' },
+  { word: 'IGUANA', wordEn: 'איגואנה', hint: 'לטאה ירוקה גדולה', hintEn: 'Big green lizard' },
+  { word: 'CROCODILE', wordEn: 'תנין', hint: 'טורף נהרות ענק', hintEn: 'Giant river predator' },
+  { word: 'CAIMAN', wordEn: 'קיימן', hint: 'תנין קטן', hintEn: 'A small crocodilian' },
+  { word: 'MONKEY', wordEn: 'קוף', hint: 'מטפס בין העצים', hintEn: 'Climbs through the trees' },
+  { word: 'HOWLER', wordEn: 'קוף שאגן', hint: 'הקוף הרועש ביותר', hintEn: 'The loudest monkey' },
+  { word: 'COATI', wordEn: 'קואטי', hint: 'קרוב של הדביבון', hintEn: 'Relative of the raccoon' },
+  { word: 'ANTEATER', wordEn: 'אוכל נמלים', hint: 'בעל לשון ארוכה מאוד', hintEn: 'Has a very long tongue' },
+  { word: 'ARMADILLO', wordEn: 'ארמדילו', hint: 'יונק עטוף שריון', hintEn: 'Armored mammal' },
+  { word: 'OCELOT', wordEn: 'אוצלוט', hint: 'חתול בר מנומר', hintEn: 'Spotted wild cat' },
+  { word: 'PUMA', wordEn: 'פומה', hint: 'חתול הרים גדול', hintEn: 'Big mountain cat' },
+  { word: 'FROG', wordEn: 'צפרדע', hint: 'קופצת ליד המים', hintEn: 'Hops near the water' },
+  { word: 'TURTLE', wordEn: 'צב', hint: 'מטיל ביצים על החוף', hintEn: 'Lays eggs on the beach' },
+  { word: 'PARROT', wordEn: 'תוכי', hint: 'ציפור צבעונית שמדברת', hintEn: 'Colorful talking bird' },
+  { word: 'HERON', wordEn: 'אנפה', hint: 'ציפור מים ארוכת רגליים', hintEn: 'Long-legged water bird' },
+  { word: 'PELICAN', wordEn: 'שקנאי', hint: 'עוף עם מקור-שק', hintEn: 'Bird with a pouch beak' },
+  { word: 'BUTTERFLY', wordEn: 'פרפר', hint: 'כנפיים צבעוניות', hintEn: 'Colorful wings' },
+  { word: 'DOLPHIN', wordEn: 'דולפין', hint: 'יונק ים חכם', hintEn: 'Smart sea mammal' },
+  { word: 'WHALE', wordEn: 'לוויתן', hint: 'היונק הגדול בים', hintEn: 'The biggest sea mammal' },
+  { word: 'STINGRAY', wordEn: 'טריגון', hint: 'דג שטוח עם עוקץ', hintEn: 'Flat fish with a sting' },
+  { word: 'SHARK', wordEn: 'כריש', hint: 'טורף הים', hintEn: 'Ocean predator' },
+  { word: 'LIZARD', wordEn: 'לטאה', hint: 'זוחל זריז', hintEn: 'A quick reptile' },
+  { word: 'GECKO', wordEn: 'שממית', hint: 'מטפסת על קירות', hintEn: 'Climbs on walls' },
+  { word: 'SNAKE', wordEn: 'נחש', hint: 'זוחל בלי רגליים', hintEn: 'Legless reptile' },
+  { word: 'KINKAJOU', wordEn: 'קינקאג\'ו', hint: 'יונק לילי מתוק', hintEn: 'Sweet nocturnal mammal' },
+  { word: 'HUMMINGBIRD', wordEn: 'יונק דבש', hint: 'ציפור זעירה שמרחפת', hintEn: 'Tiny hovering bird' },
+  // Nature & plants
+  { word: 'ARENAL', wordEn: 'ארנל', hint: 'הר געש מפורסם', hintEn: 'Famous volcano' },
+  { word: 'MONTEVERDE', wordEn: 'מונטה ורדה', hint: 'יער ענן מפורסם', hintEn: 'Famous cloud forest' },
+  { word: 'CORCOVADO', wordEn: 'קורקובדו', hint: 'פארק לאומי עשיר במינים', hintEn: 'Biodiverse national park' },
+  { word: 'TENORIO', wordEn: 'טנוריו', hint: 'הר הגעש של ריו סלסטה', hintEn: 'Volcano of Rio Celeste' },
+  { word: 'VOLCANO', wordEn: 'הר געש', hint: 'פולט לבה', hintEn: 'Erupts lava' },
+  { word: 'RAINFOREST', wordEn: 'יער גשם', hint: 'יער טרופי לח', hintEn: 'Wet tropical forest' },
+  { word: 'JUNGLE', wordEn: 'ג\'ונגל', hint: 'יער סבוך וצפוף', hintEn: 'Dense wild forest' },
+  { word: 'WATERFALL', wordEn: 'מפל', hint: 'מים נופלים מגובה', hintEn: 'Falling water' },
+  { word: 'MANGROVE', wordEn: 'מנגרוב', hint: 'יער על מים מלוחים', hintEn: 'Salt-water coastal forest' },
+  { word: 'CANOPY', wordEn: 'צמרות', hint: 'החופה העליונה של היער', hintEn: 'Top layer of the forest' },
+  { word: 'ORCHID', wordEn: 'סחלב', hint: 'פרח יפהפה', hintEn: 'A beautiful flower' },
+  { word: 'BAMBOO', wordEn: 'במבוק', hint: 'צמח גבוה וחלול', hintEn: 'Tall hollow plant' },
+  { word: 'PACIFIC', wordEn: 'האוקיינוס השקט', hint: 'הים שבמערב קוסטה ריקה', hintEn: "Costa Rica's western ocean" },
+  { word: 'RAINBOW', wordEn: 'קשת בענן', hint: 'צבעים אחרי הגשם', hintEn: 'Colors after the rain' },
+  { word: 'TROPICAL', wordEn: 'טרופי', hint: 'אקלים חם ולח', hintEn: 'Hot and humid climate' },
+  // Food
+  { word: 'COFFEE', wordEn: 'קפה', hint: 'היצוא המפורסם של קוסטה ריקה', hintEn: "Costa Rica's famous export" },
+  { word: 'BANANA', wordEn: 'בננה', hint: 'פרי צהוב מעוקל', hintEn: 'Curved yellow fruit' },
+  { word: 'PINEAPPLE', wordEn: 'אננס', hint: 'פרי טרופי קוצני', hintEn: 'Spiky tropical fruit' },
+  { word: 'MANGO', wordEn: 'מנגו', hint: 'פרי טרופי מתוק', hintEn: 'Sweet tropical fruit' },
+  { word: 'PAPAYA', wordEn: 'פפאיה', hint: 'פרי כתום גדול', hintEn: 'Big orange fruit' },
+  { word: 'COCONUT', wordEn: 'קוקוס', hint: 'אגוז דקל', hintEn: 'A palm nut' },
+  { word: 'CACAO', wordEn: 'קקאו', hint: 'ממנו מכינים שוקולד', hintEn: 'Chocolate comes from it' },
+  // Adventure & travel
+  { word: 'SNORKEL', wordEn: 'שנרקול', hint: 'צלילת פני מים', hintEn: 'Surface diving' },
+  { word: 'RAFTING', wordEn: 'רפטינג', hint: 'שיט בנהר סוער', hintEn: 'Wild river ride' },
+  { word: 'KAYAK', wordEn: 'קייאק', hint: 'סירה אישית קטנה', hintEn: 'Small personal boat' },
+  { word: 'ZIPLINE', wordEn: 'אומגה', hint: 'גלישה על כבל בין העצים', hintEn: 'Sliding a cable through trees' },
+  { word: 'HIKING', wordEn: 'טיול רגלי', hint: 'הליכה בשבילים', hintEn: 'Walking the trails' },
+  { word: 'SURFING', wordEn: 'גלישה', hint: 'רכיבה על גלים', hintEn: 'Riding the waves' },
+  { word: 'SUNSET', wordEn: 'שקיעה', hint: 'סוף היום בשמיים', hintEn: 'End-of-day sky' },
+  { word: 'BEACH', wordEn: 'חוף', hint: 'חול ליד הים', hintEn: 'Sand by the sea' },
+  { word: 'HAMMOCK', wordEn: 'ערסל', hint: 'נדנדת מנוחה בין עצים', hintEn: 'A resting swing between trees' },
+  { word: 'PASSPORT', wordEn: 'דרכון', hint: 'מסמך לטיסות', hintEn: 'Travel document' },
+  { word: 'COMPASS', wordEn: 'מצפן', hint: 'מראה כיוונים', hintEn: 'Shows directions' },
 ]
 
 // ─── JIGSAW DATA ───
@@ -522,8 +581,38 @@ function MemoryGame({ t }: { t: (he: string, en: string) => string }) {
 }
 
 // ─── WORD SCRAMBLE GAME ───
+const SCRAMBLE_ROUND = 8
+
+// Pick a fresh round of words, avoiding those used in recent rounds (tracked in
+// localStorage) so the same words don't keep coming back until the bank cycles.
+function pickScrambleRound(): ScrambleWord[] {
+  const KEY = 'scramble-used'
+  let used: string[] = []
+  try { used = JSON.parse(localStorage.getItem(KEY) || '[]') } catch { used = [] }
+  const usedSet = new Set(used)
+
+  let pool = scrambleWords.filter(w => !usedSet.has(w.word))
+  if (pool.length < SCRAMBLE_ROUND) { pool = [...scrambleWords]; used = [] }
+
+  // Fisher-Yates shuffle
+  const arr = [...pool]
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  const chosen = arr.slice(0, SCRAMBLE_ROUND)
+
+  // Remember what we just showed, keeping a rolling window so there's always a
+  // fresh batch available next round.
+  const cap = Math.max(0, scrambleWords.length - SCRAMBLE_ROUND)
+  const nextUsed = [...used, ...chosen.map(w => w.word)].slice(-cap)
+  try { localStorage.setItem(KEY, JSON.stringify(nextUsed)) } catch { /* ignore */ }
+
+  return chosen.map(w => ({ ...w, scrambled: shuffleString(w.word) }))
+}
+
 function ScrambleGame({ t }: { t: (he: string, en: string) => string }) {
-  const [words] = useState(() => [...scrambleWords].sort(() => Math.random() - 0.5).slice(0, 8).map(w => ({ ...w, scrambled: shuffleString(w.word) })))
+  const [words] = useState(() => pickScrambleRound())
   const [current, setCurrent] = useState(0)
   const [input, setInput] = useState('')
   const [score, setScore] = useState(0)
