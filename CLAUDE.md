@@ -87,7 +87,8 @@ src/
 ```
 
 ## Deployed Version
-**App version: `0.44`** (`src/version.ts`, shown in-app). Live at https://costaricapp-2026.web.app. Bump `APP_VERSION` on every deploy so PC↔mobile sessions can confirm the build loaded. Deploy hosting with `npm run build && firebase deploy --only hosting`; functions with `firebase deploy --only functions`; rules with `firebase deploy --only firestore:rules` / `--only storage`.
+**App version: `0.45`** — HomePage shows a **"Podcast for the Road"** card (family-prep audio `public/audio/family-preparation.m4a`, 64k mono ~25MB) below the notification toggle, gated to appear only from **Jul 23 2026 onward** (`new Date() >= 2026-07-23T00:00+03:00`) and dismissible via a "Done listening" button (localStorage `family-podcast-hidden`). Source script: `podcast-sources/00-family-preparation.md`.
+_(prior: `0.44`)_ (`src/version.ts`, shown in-app). Live at https://costaricapp-2026.web.app. Bump `APP_VERSION` on every deploy so PC↔mobile sessions can confirm the build loaded. Deploy hosting with `npm run build && firebase deploy --only hosting`; functions with `firebase deploy --only functions`; rules with `firebase deploy --only firestore:rules` / `--only storage`.
 
 ## Recent Work Log (this session, → v0.44)
 Chronological summary of what was built/changed. All deployed & working.

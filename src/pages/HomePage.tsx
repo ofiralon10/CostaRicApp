@@ -33,6 +33,10 @@ export default function HomePage() {
   const { member } = useAuth()
   const { enabled: notifEnabled, loading: notifLoading, error: notifError, enable: enableNotif, disable: disableNotif } = useNotifications()
   const [testSent, setTestSent] = useState(false)
+  const [podcastHidden, setPodcastHidden] = useState(() => localStorage.getItem('family-podcast-hidden') === '1')
+  const hidePodcast = () => { localStorage.setItem('family-podcast-hidden', '1'); setPodcastHidden(true) }
+  // Show the "podcast for the road" card only from Jul 23 (departure day) onward, until dismissed
+  const showPodcast = !podcastHidden && new Date() >= new Date('2026-07-23T00:00:00+03:00')
 
   const sendTestNotif = async () => {
     if (!member) return
@@ -136,6 +140,25 @@ export default function HomePage() {
             )}
           </div>
           {notifError && <p className="sb-notif-error">{notifError}</p>}
+        </div>
+      )}
+
+      {/* Family preparation podcast — appears from departure day (Jul 23) until dismissed */}
+      {showPodcast && (
+        <div className="sb-podcast-card">
+          <div className="sb-podcast-top">
+            <span className="sb-podcast-title">🎧 {t('פודקאסט לדרך', 'Podcast for the Road')}</span>
+            <button className="sb-podcast-hide" onClick={hidePodcast}>{t('סיימנו להאזין ✕', 'Done listening ✕')}</button>
+          </div>
+          <p className="sb-podcast-sub">{t('שיחה משפחתית לפני המסע — האזינו יחד בדרך לשדה 🌴', 'A family talk before the trip — listen together on the way ✈️')}</p>
+          <div className="sb-podcast-item">
+            <span className="sb-podcast-label">{t('גרסה קצרה', 'Short version')} · 22 {t('דק׳', 'min')}</span>
+            <audio className="sb-podcast-audio" controls preload="none" src="/audio/family-preparation-short.m4a" />
+          </div>
+          <div className="sb-podcast-item">
+            <span className="sb-podcast-label">{t('גרסה ארוכה', 'Long version')} · 50 {t('דק׳', 'min')}</span>
+            <audio className="sb-podcast-audio" controls preload="none" src="/audio/family-preparation.m4a" />
+          </div>
         </div>
       )}
 
