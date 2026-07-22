@@ -15,6 +15,7 @@ import CurrencyPage from './pages/CurrencyPage'
 import DocumentsPage from './pages/DocumentsPage'
 import AwardsPage from './pages/AwardsPage'
 import ChatPage from './pages/ChatPage'
+import BudgetPage from './pages/BudgetPage'
 import AlbumPage from './pages/AlbumPage'
 import LoginPage from './pages/LoginPage'
 
@@ -44,6 +45,7 @@ function AppRoutes() {
         <Route path="/documents" element={<DocumentsPage />} />
         <Route path="/awards" element={<AwardsPage />} />
         <Route path="/chat" element={<ChatPage />} />
+        <Route path="/budget" element={<BudgetPage />} />
         <Route path="/album" element={<AlbumPage />} />
         <Route path="/emergency" element={<EmergencyPage />} />
       </Route>

@@ -20,6 +20,7 @@ const NAV_CARDS = [
   { id: 'map', label: 'מפה', labelEn: 'Map', path: '/map', image: '/images/nav-weather.jpg' },
   { id: 'packing', label: 'ארוז', labelEn: 'Packing', path: '/packing', image: '/images/nav-stickers.jpg' },
   { id: 'currency', label: 'מטבעות', labelEn: 'Currency', path: '/currency', image: '/images/nav-flights.jpg' },
+  { id: 'budget', label: 'תקציב', labelEn: 'Budget', path: '/budget', image: '/images/nav-hotels.jpg', emoji: '💰' },
   { id: 'awards', label: 'פרסים', labelEn: 'Awards', path: '/awards', image: '/images/nav-awards.jpg' },
   { id: 'chat', label: 'מדריך AI', labelEn: 'AI Guide', path: '/chat', image: '/images/nav-chat.jpg' },
   { id: 'album', label: 'אלבום', labelEn: 'Album', path: '/album', image: '/images/nav-activities.jpg' },

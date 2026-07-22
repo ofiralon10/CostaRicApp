@@ -87,7 +87,8 @@ src/
 ```
 
 ## Deployed Version
-**App version: `0.45`** — HomePage shows a **"Podcast for the Road"** card (family-prep audio `public/audio/family-preparation.m4a`, 64k mono ~25MB) below the notification toggle, gated to appear only from **Jul 23 2026 onward** (`new Date() >= 2026-07-23T00:00+03:00`) and dismissible via a "Done listening" button (localStorage `family-podcast-hidden`). Source script: `podcast-sources/00-family-preparation.md`.
+**App version: `0.47`** — Added **Budget Tracker** (`/budget`, `src/pages/BudgetPage.tsx`). Parent-only (kids see a "grown-ups only" screen, matching the app's price-hiding). Live family-shared expense log via `useSharedState('budget-expenses')` (Firestore `shared/budget-expenses`, array of `{id, amount, currency, usd, category, note, memberId, ts}`). Log a spend in USD/CRC/EUR/ILS → converted to USD at entry time using live rates (`open.er-api.com`, same source as CurrencyPage; falls back to approx rates offline) and the USD value is **locked** on the record so totals stay stable offline. 6 categories (Food, Activities, Shopping, Transport, Tips, Other). Shows running total, per-category breakdown bars, recent-expense list (who paid + date + delete), and a reference "planned pre-paid budget" card (flights/hotels/car/etc, ~$38.8k) with a grand total. Nav card added on HomePage (reuses `nav-hotels.jpg` as placeholder image — regenerate a dedicated watercolor via the Gemini pipeline when convenient). No Firestore rules change needed (`shared/{docId}` already covers it).
+_(prior: `0.46`)_ — HomePage shows a **"Podcast for the Road"** card (family-prep audio `public/audio/family-preparation.m4a`, 64k mono ~25MB) below the notification toggle, gated to appear only from **Jul 23 2026 onward** (`new Date() >= 2026-07-23T00:00+03:00`) and dismissible via a "Done listening" button (localStorage `family-podcast-hidden`). Source script: `podcast-sources/00-family-preparation.md`.
 _(prior: `0.44`)_ (`src/version.ts`, shown in-app). Live at https://costaricapp-2026.web.app. Bump `APP_VERSION` on every deploy so PC↔mobile sessions can confirm the build loaded. Deploy hosting with `npm run build && firebase deploy --only hosting`; functions with `firebase deploy --only functions`; rules with `firebase deploy --only firestore:rules` / `--only storage`.
 
 ## Recent Work Log (this session, → v0.44)
@@ -211,7 +212,7 @@ Hebrew audio podcasts for each destination, generated via Google NotebookLM's Au
 - **Install:** App is installable on iOS (Add to Home Screen) and Android (install prompt)
 
 ## Planned Features (not yet built)
-- Budget tracker
+- (Budget tracker shipped in v0.47 — see Deployed Version.)
 
 ## Design Inspiration
 Based on the Thailand trip app by Ran Aviv (ranaviv.com/thailand-trip-app):
