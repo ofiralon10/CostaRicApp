@@ -31,7 +31,7 @@ const NAV_CARDS = [
 export default function HomePage() {
   const { t } = useLang()
   const navigate = useNavigate()
-  const { member } = useAuth()
+  const { member, isParent } = useAuth()
   const { enabled: notifEnabled, loading: notifLoading, error: notifError, enable: enableNotif, disable: disableNotif } = useNotifications()
   const [testSent, setTestSent] = useState(false)
   const [podcastHidden, setPodcastHidden] = useState(() => localStorage.getItem('family-podcast-hidden') === '1')
@@ -165,7 +165,7 @@ export default function HomePage() {
 
       {/* Navigation Grid */}
       <div className="sb-nav-grid">
-        {NAV_CARDS.map(card => (
+        {NAV_CARDS.filter(card => card.id !== 'budget' || isParent).map(card => (
           <button
             key={card.id}
             className="sb-nav-card"
