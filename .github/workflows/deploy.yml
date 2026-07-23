@@ -1,0 +1,43 @@
+name: Deploy to Firebase Hosting
+
+# Builds the app and deploys it live to https://costaricapp-2026.web.app.
+# Runs automatically on every push to the dev branch or main, and can also be
+# started by hand from the GitHub "Actions" tab (Run workflow) — handy from a phone.
+#
+# One-time setup: add a repository secret named FIREBASE_SERVICE_ACCOUNT
+# (Settings → Secrets and variables → Actions → New repository secret) whose
+# value is a Firebase service-account JSON key with Hosting deploy permission.
+
+on:
+  push:
+    branches:
+      - claude/costa-rica-app-dev-05ox2l
+      - main
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Firebase Hosting (live)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: costaricapp-2026
