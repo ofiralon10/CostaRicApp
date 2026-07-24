@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { format, parseISO } from 'date-fns'
 import { he } from 'date-fns/locale'
-import { MapPin, Car, ChevronDown, ChevronUp, DollarSign, ExternalLink } from 'lucide-react'
+import { MapPin, Car, ChevronDown, ChevronUp, DollarSign, ExternalLink, CheckCircle2, Circle } from 'lucide-react'
 import { useLang } from '../context/LanguageContext'
 import { useAuth } from '../context/AuthContext'
 import { itinerary as defaultItinerary } from '../data/itinerary'
@@ -18,7 +18,17 @@ export default function ItineraryPage() {
   const [expandedDay, setExpandedDay] = useState<number | null>(scrollTarget)
   const [storedItinerary] = useSharedState<DayPlan[] | null>('itinerary', null)
   const itinerary = storedItinerary ?? defaultItinerary
+  // Family-shared "done" state — checking off an activity syncs to everyone.
+  const [doneMap, setDoneMap] = useSharedState<Record<string, boolean>>('activity-done', {})
   const dayRefs = useRef<Record<number, HTMLElement | null>>({})
+
+  const toggleDone = (id: string) =>
+    setDoneMap(prev => {
+      const next = { ...prev }
+      if (next[id]) delete next[id]
+      else next[id] = true
+      return next
+    })
 
   useEffect(() => {
     if (scrollTarget && dayRefs.current[scrollTarget]) {
@@ -54,6 +64,9 @@ export default function ItineraryPage() {
             locale: lang === 'he' ? he : undefined,
           })
           const color = regionColors[day.region] || '#64748b'
+          const totalActs = day.activities.length
+          const doneActs = day.activities.filter(a => doneMap[a.id]).length
+          const allDone = totalActs > 0 && doneActs === totalActs
 
           return (
             <div key={day.day} className="timeline-item" ref={el => { dayRefs.current[day.day] = el }} onClick={() => toggle(day.day)}>
@@ -71,7 +84,15 @@ export default function ItineraryPage() {
                       <span className="day-date">{dateStr}</span>
                     </div>
                   </div>
-                  {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  <div className="day-header-right">
+                    {totalActs > 0 && (
+                      <span className={`day-progress ${allDone ? 'done' : ''}`}>
+                        {allDone ? <CheckCircle2 size={13} /> : null}
+                        {doneActs}/{totalActs}
+                      </span>
+                    )}
+                    {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  </div>
                 </div>
 
                 {isExpanded && (
@@ -85,36 +106,49 @@ export default function ItineraryPage() {
 
                     {day.activities.length > 0 && (
                       <div className="activities-list">
-                        {day.activities.map(a => (
-                          <div key={a.id} className="activity-item">
-                            <div className="activity-header">
-                              <span className="activity-name">{t(a.nameHe, a.name)}</span>
-                              {a.mapsUrl && (
-                                <a
-                                  href={a.mapsUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="maps-link"
-                                  onClick={e => e.stopPropagation()}
-                                >
-                                  <MapPin size={14} />
-                                  <ExternalLink size={12} />
-                                </a>
+                        {day.activities.map(a => {
+                          const isDone = !!doneMap[a.id]
+                          return (
+                          <div key={a.id} className={`activity-item ${isDone ? 'done' : ''}`}>
+                            <button
+                              className={`activity-check ${isDone ? 'checked' : ''}`}
+                              onClick={e => { e.stopPropagation(); toggleDone(a.id) }}
+                              aria-label={isDone ? t('בטל סימון', 'Mark not done') : t('סמן כבוצע', 'Mark done')}
+                              aria-pressed={isDone}
+                            >
+                              {isDone ? <CheckCircle2 size={22} /> : <Circle size={22} />}
+                            </button>
+                            <div className="activity-body">
+                              <div className="activity-header">
+                                <span className="activity-name">{t(a.nameHe, a.name)}</span>
+                                {a.mapsUrl && (
+                                  <a
+                                    href={a.mapsUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="maps-link"
+                                    onClick={e => e.stopPropagation()}
+                                  >
+                                    <MapPin size={14} />
+                                    <ExternalLink size={12} />
+                                  </a>
+                                )}
+                              </div>
+                              {a.description && (
+                                <span className="activity-desc">{t(a.descriptionHe || a.description, a.description)}</span>
+                              )}
+                              {isParent && (a.costPerPerson || a.costTotal) && (
+                                <span className="activity-cost">
+                                  <DollarSign size={12} />
+                                  {a.costPerPerson
+                                    ? t(`$${a.costPerPerson} לאדם`, `$${a.costPerPerson}/person`)
+                                    : t(`$${a.costTotal} סה"כ`, `$${a.costTotal} total`)}
+                                </span>
                               )}
                             </div>
-                            {a.description && (
-                              <span className="activity-desc">{t(a.descriptionHe || a.description, a.description)}</span>
-                            )}
-                            {isParent && (a.costPerPerson || a.costTotal) && (
-                              <span className="activity-cost">
-                                <DollarSign size={12} />
-                                {a.costPerPerson
-                                  ? t(`$${a.costPerPerson} לאדם`, `$${a.costPerPerson}/person`)
-                                  : t(`$${a.costTotal} סה"כ`, `$${a.costTotal} total`)}
-                              </span>
-                            )}
                           </div>
-                        ))}
+                          )
+                        })}
                       </div>
                     )}
 

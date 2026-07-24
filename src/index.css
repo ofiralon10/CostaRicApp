@@ -470,6 +470,30 @@ body {
   gap: 10px;
 }
 
+.day-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.day-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gray-500);
+  background: var(--gray-100);
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.day-progress.done {
+  color: var(--green-700);
+  background: var(--green-100);
+}
+
 .day-badge {
   color: #fff;
   font-size: 0.7rem;
@@ -523,12 +547,45 @@ body {
 
 .activity-item {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
   padding: 8px;
   background: var(--gray-50);
   border-radius: var(--radius-sm);
+  transition: background 0.15s, opacity 0.15s;
 }
+
+.activity-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.activity-check {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 1px;
+  cursor: pointer;
+  color: var(--gray-400);
+  transition: color 0.15s, transform 0.1s;
+}
+.activity-check.checked { color: var(--green-600); }
+.activity-check:active { transform: scale(0.88); }
+
+.activity-item.done { background: var(--green-50); }
+.activity-item.done .activity-name {
+  text-decoration: line-through;
+  color: var(--gray-400);
+}
+.activity-item.done .activity-desc { color: var(--gray-400); }
 
 .activity-header {
   display: flex;
