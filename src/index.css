@@ -5910,3 +5910,42 @@ body {
   font-size: 0.92rem; font-weight: 700; color: var(--gray-700);
 }
 .budget-grand-total { color: var(--green-800); font-size: 1rem; }
+
+/* ===== Weather Forecast (Home) ===== */
+.wx-card {
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-md);
+  color: white;
+}
+.wx-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.wx-title { font-size: 0.95rem; font-weight: 700; }
+.wx-offline { font-size: 0.72rem; opacity: 0.85; }
+.wx-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+}
+.wx-day {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: rgba(255,255,255,0.16);
+  border-radius: var(--radius-sm);
+  padding: 10px 4px;
+  text-align: center;
+}
+.wx-day-name { font-size: 0.8rem; font-weight: 700; }
+.wx-day-date { font-size: 0.66rem; opacity: 0.8; }
+.wx-place {
+  font-size: 0.66rem; opacity: 0.95; line-height: 1.2;
+  min-height: 2.1em; display: flex; align-items: center; margin-top: 2px;
+}
+.wx-emoji { font-size: 1.9rem; line-height: 1.1; margin: 2px 0; }
+.wx-emoji.wx-dim { opacity: 0.6; font-size: 1.3rem; }
+.wx-temp { display: flex; align-items: baseline; gap: 5px; }
+.wx-temp strong { font-size: 1.15rem; font-weight: 800; }
+.wx-temp-min { font-size: 0.8rem; opacity: 0.8; }
+.wx-cond { font-size: 0.66rem; opacity: 0.95; }
+.wx-rain { font-size: 0.66rem; opacity: 0.95; margin-top: 1px; }

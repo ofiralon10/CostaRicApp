@@ -7,6 +7,7 @@ import { useNotifications } from '../hooks/useNotifications'
 import { useAuth } from '../context/AuthContext'
 import { httpsCallable } from 'firebase/functions'
 import { functions } from '../firebase'
+import WeatherForecast from '../components/WeatherForecast'
 
 const DEPARTURE = '2026-07-23T05:00:00+03:00'
 const TRIP_END = '2026-08-11T04:25:00+03:00'
@@ -116,6 +117,9 @@ export default function HomePage() {
           </div>
         </div>
       )}
+
+      {/* Weather — today + next 2 days, each for the place visited that day */}
+      <WeatherForecast />
 
       {/* Notification Toggle */}
       {!notifLoading && (
