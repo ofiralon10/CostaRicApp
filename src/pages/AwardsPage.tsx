@@ -3,7 +3,8 @@ import { useLang } from '../context/LanguageContext'
 import { useAuth } from '../context/AuthContext'
 import { useSharedState } from '../hooks/useSharedState'
 import { httpsCallable } from 'firebase/functions'
-import { functions } from '../firebase'
+import { ref as storageRef, uploadString, getDownloadURL } from 'firebase/storage'
+import { functions, storage } from '../firebase'
 import { X, Send, Sparkles, Loader } from 'lucide-react'
 
 interface Award {
@@ -57,6 +58,7 @@ export default function AwardsPage() {
   const [generatedImage, setGeneratedImage] = useState<string | null>(null)
   const [generatingImage, setGeneratingImage] = useState(false)
   const [notifyEveryone, setNotifyEveryone] = useState(true)
+  const [sending, setSending] = useState(false)
 
   const currentMember = member
     ? FAMILY.find(f => f.email === member.email) || FAMILY[0]
@@ -77,10 +79,31 @@ export default function AwardsPage() {
     setGeneratingImage(false)
   }
 
-  const handleSend = () => {
-    if (!selectedTo || !selectedIcon || !message.trim()) return
+  const handleSend = async () => {
+    if (!selectedTo || !selectedIcon || !message.trim() || sending) return
+    setSending(true)
     const ts = Date.now()
     const msg = message.trim()
+
+    // The AI image is a base64 data URL. Storing it inside the Firestore
+    // `awards` document would blow past the 1 MiB doc limit (so the write
+    // silently fails and the award vanishes on reload). Upload it to Storage
+    // and keep only the short download URL on the award.
+    let imageUrl: string | undefined
+    if (generatedImage) {
+      try {
+        const path = `awards/${ts}-${Math.random().toString(36).slice(2, 8)}.jpg`
+        const sRef = storageRef(storage, path)
+        await uploadString(sRef, generatedImage, 'data_url')
+        imageUrl = await getDownloadURL(sRef)
+      } catch (err) {
+        console.error('Award image upload failed:', err)
+        // Fall back to sending the award without the image rather than
+        // breaking persistence of the whole award.
+        imageUrl = undefined
+      }
+    }
+
     const base = {
       fromId: currentMember.id,
       fromName: currentMember.name,
@@ -89,7 +112,7 @@ export default function AwardsPage() {
       icon: selectedIcon,
       message: msg,
       timestamp: ts,
-      ...(generatedImage ? { imageUrl: generatedImage } : {}),
+      ...(imageUrl ? { imageUrl } : {}),
     }
 
     let toEveryone = false
@@ -141,6 +164,7 @@ export default function AwardsPage() {
     setImagePrompt('')
     setGeneratedImage(null)
     setNotifyEveryone(true)
+    setSending(false)
   }
 
   const formatTime = (ts: number) => {
@@ -325,11 +349,11 @@ export default function AwardsPage() {
             {/* Send */}
             <button
               className="awards-send-btn"
-              disabled={!selectedTo || !selectedIcon || !message.trim()}
+              disabled={!selectedTo || !selectedIcon || !message.trim() || sending}
               onClick={handleSend}
             >
-              <Send size={16} />
-              {t('שלחו!', 'Send!')}
+              {sending ? <Loader size={16} className="chat-spinner" /> : <Send size={16} />}
+              {sending ? t('שולח...', 'Sending...') : t('שלחו!', 'Send!')}
             </button>
           </div>
         </div>
