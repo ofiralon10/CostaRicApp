@@ -92,7 +92,10 @@ export default function AwardsPage() {
     let imageUrl: string | undefined
     if (generatedImage) {
       try {
-        const path = `awards/${ts}-${Math.random().toString(36).slice(2, 8)}.jpg`
+        // Store under album/ — its Storage rule is already deployed. (Raw files
+        // here don't appear in the family gallery, which renders from the
+        // `album` Firestore array, not a Storage listing.)
+        const path = `album/award-${ts}-${Math.random().toString(36).slice(2, 8)}.jpg`
         const sRef = storageRef(storage, path)
         await uploadString(sRef, generatedImage, 'data_url')
         imageUrl = await getDownloadURL(sRef)
