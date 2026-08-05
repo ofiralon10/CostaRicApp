@@ -412,8 +412,8 @@ export const itinerary: DayPlan[] = [
         id: 'a17-1',
         name: 'Teleférico cable car + Casa de Campo (morning)',
         nameHe: 'רכבל טלפריקו + קאסה דה קמפו (בבוקר)',
-        description: 'Scenic cable car from Parque del Oeste over the city into Madrid\'s big green park. ~€6 one-way / €9 return, ~11 min each way. Go in the morning while cooler',
-        descriptionHe: 'רכבל נופי מפארק דל אאסטה מעל העיר אל הפארק הירוק הגדול של מדריד. כ-6€ לכיוון / 9€ הלוך-ושוב, כ-11 דק׳ לכיוון. עדיף בבוקר כשקריר',
+        description: 'Scenic cable car from Parque del Oeste over the city into Madrid\'s big green park. Buy ROUND-TRIP (~€6 adult) — the far end is a café/viewpoint deep in the park with no easy way onward, so ride both ways for the views. ~11 min each way; go in the morning while cooler',
+        descriptionHe: 'רכבל נופי מפארק דל אאסטה מעל העיר אל הפארק הירוק הגדול של מדריד. קונים כרטיס הלוך-ושוב (כ-6€ למבוגר) — התחנה הרחוקה היא בית קפה/תצפית עמוק בתוך הפארק בלי דרך נוחה להמשיך, אז נוסעים לשני הכיוונים בשביל הנוף. כ-11 דק׳ לכיוון; עדיף בבוקר כשקריר',
         mapsUrl: 'https://maps.google.com/?q=Teleférico+de+Madrid',
       },
       {
