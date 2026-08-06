@@ -14,6 +14,11 @@ on:
       - claude/costa-rica-app-dev-05ox2l
       - main
   workflow_dispatch:
+    inputs:
+      clear_itinerary:
+        description: 'Also clear the shared/itinerary Firestore override so the app uses the built-in itinerary'
+        type: boolean
+        default: false
 
 jobs:
   build_and_deploy:
@@ -41,3 +46,11 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           channelId: live
           projectId: costaricapp-2026
+
+      - name: Clear shared/itinerary override (manual, optional)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.clear_itinerary }}
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          npm install firebase-admin@12 --no-save
+          node scripts/clear-shared-itinerary.mjs
