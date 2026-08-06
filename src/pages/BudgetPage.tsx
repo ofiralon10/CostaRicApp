@@ -24,6 +24,7 @@ interface Category {
 const CATEGORIES: Category[] = [
   { id: 'food', he: 'אוכל', en: 'Food', emoji: '🍽️' },
   { id: 'activities', he: 'פעילויות', en: 'Activities', emoji: '🎟️' },
+  { id: 'accommodation', he: 'לינה', en: 'Accommodation', emoji: '🏨' },
   { id: 'shopping', he: 'קניות', en: 'Shopping', emoji: '🛍️' },
   { id: 'transport', he: 'תחבורה', en: 'Transport', emoji: '🚗' },
   { id: 'tips', he: 'טיפים', en: 'Tips', emoji: '💵' },
