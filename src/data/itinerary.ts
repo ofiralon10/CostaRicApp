@@ -396,8 +396,8 @@ export const itinerary: DayPlan[] = [
         mapsUrl: 'https://maps.google.com/?q=Templo+de+Debod+Madrid',
       },
     ],
-    notes: 'Arrive 10:50. Transfer booked via Booking (8-seat van, €55, conf #247998892). Keep the afternoon easy after the long travel day.',
-    notesHe: 'נחיתה 10:50. הוזמנה הסעה דרך בוקינג באוטו גדול (8 מקומות) ב-55 יורו. מספר אישור 247998892. שומרים על אחר צהריים רגוע אחרי יום הטיסות.',
+    notes: 'Arrive 10:50. Transfer booked via Booking (8-seat van, €55, conf #247998892). Keep the afternoon easy after the long travel day. Food tip: Mercado de San Miguel is best for grazing tapas, not a full dinner — for a proper meal try the tapas bars in La Latina or Malasaña. Carry water; August evenings stay warm.',
+    notesHe: 'נחיתה 10:50. הוזמנה הסעה דרך בוקינג באוטו גדול (8 מקומות) ב-55 יורו. מספר אישור 247998892. שומרים על אחר צהריים רגוע אחרי יום הטיסות. טיפ אוכל: שוק סן מיגל מצוין לנשנוש טאפאס, פחות לארוחה מלאה — לארוחה אמיתית עדיף בָּרֵי הטאפאס בלה לטינה או במאלאסניה. כדאי לשאת מים; ערבי אוגוסט חמים.',
   },
   {
     day: 17,
@@ -449,6 +449,8 @@ export const itinerary: DayPlan[] = [
         mapsUrl: 'https://maps.google.com/?q=Azotea+Circulo+de+Bellas+Artes',
       },
     ],
+    notes: 'Getting around: the Teleférico is on the west side (Pintor Rosales, by Templo de Debod); Ikono is south near Atocha/Reina Sofía — hop the metro between them (~20 min). Book Ikono online ahead. Lunch near Ikono: tapas at Mercado de Antón Martín or in La Latina. Use the midday heat as an excuse for AC (Ikono / the optional Prado) and save Retiro for the cooler evening.',
+    notesHe: 'תנועה בעיר: הרכבל נמצא בצד המערבי (פינטור רוסאלס, ליד מקדש דבוד); איקונו בדרום ליד אטוצ׳ה/ריינה סופיה — נוסעים במטרו ביניהם (כ-20 דק׳). כדאי להזמין איקונו מראש אונליין. צהריים ליד איקונו: טאפאס בשוק אנטון מרטין או בלה לטינה. מנצלים את חום הצהריים בשביל מיזוג (איקונו / פראדו האופציונלי) ושומרים את רטירו לערב הקריר.',
   },
   {
     day: 18,
@@ -471,6 +473,8 @@ export const itinerary: DayPlan[] = [
         id: 'a18-2',
         name: 'Tapas lunch on Calle Cava Baja',
         nameHe: 'ארוחת צהריים טאפאס ברחוב קאבה באחה',
+        description: "Madrid's classic tapas street — e.g. Txirimiri or the famous Casa Lucio (huevos rotos)",
+        descriptionHe: 'רחוב הטאפאס הקלאסי של מדריד — למשל צ׳ירימירי או קאסה לוסיו המפורסמת (חביתת ביצים ותפוחי אדמה)',
         mapsUrl: 'https://maps.google.com/?q=Calle+Cava+Baja+Madrid',
       },
       {
@@ -487,8 +491,8 @@ export const itinerary: DayPlan[] = [
         nameHe: 'ארוחת ערב משפחתית',
       },
     ],
-    notes: 'Bernabéu Tour booked for 15:00 — buy tickets online in advance. No match that day, so the stadium runs full Sunday hours (10:00–18:30).',
-    notesHe: 'סיור ברנבאו נקבע ל-15:00 — לקנות כרטיסים אונליין מראש. אין משחק באותו יום, כך שהאצטדיון פתוח בשעות יום ראשון המלאות (10:00–18:30).',
+    notes: 'Bernabéu Tour booked for 15:00 — buy tickets online in advance. No match that day, so the stadium runs full Sunday hours (10:00–18:30). El Rastro is busiest late morning and known for pickpockets — go early (~9:30) and keep bags zipped in front. Metro line 10 runs straight to Santiago Bernabéu; arrive ~20 min before 15:00.',
+    notesHe: 'סיור ברנבאו נקבע ל-15:00 — לקנות כרטיסים אונליין מראש. אין משחק באותו יום, כך שהאצטדיון פתוח בשעות יום ראשון המלאות (10:00–18:30). אל ראסטרו הכי עמוס בשעות הבוקר המאוחרות וידוע בכייסים — מגיעים מוקדם (בסביבות 9:30) ושומרים תיקים סגורים מקדימה. מטרו קו 10 מגיע ישר לתחנת סנטיאגו ברנבאו; להגיע כ-20 דק׳ לפני 15:00.',
   },
   {
     day: 19,
@@ -525,7 +529,7 @@ export const itinerary: DayPlan[] = [
         descriptionHe: 'נחיתה 04:25 (למחרת, 11 באוג׳)',
       },
     ],
-    notes: 'El Al security is strict — plan to reach MAD airport by ~19:45 (about 3 hrs before the flight), so leave the city center around 19:00.',
-    notesHe: 'הבידוק הביטחוני של אל על קפדני — כדאי להגיע לשדה MAD עד 19:45 בערך (כ-3 שעות לפני הטיסה), אז יוצאים ממרכז העיר בסביבות 19:00.',
+    notes: 'El Al security is strict — plan to reach MAD airport by ~19:45 (about 3 hrs before the flight), so leave the city center around 19:00. From the center allow ~30–40 min by Metro/Cercanías, or take a fixed-rate airport taxi (~€30).',
+    notesHe: 'הבידוק הביטחוני של אל על קפדני — כדאי להגיע לשדה MAD עד 19:45 בערך (כ-3 שעות לפני הטיסה), אז יוצאים ממרכז העיר בסביבות 19:00. מהמרכז צריך להקציב כ-30–40 דק׳ במטרו/סרקניאס, או מונית שדה בתעריף קבוע (כ-30€).',
   },
 ]
