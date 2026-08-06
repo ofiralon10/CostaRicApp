@@ -20,7 +20,7 @@ You can also help with: restaurant recommendations, local tips, safety advice, w
 Only decline questions that have absolutely nothing to do with Costa Rica, Spain, travel, or the trip.
 
 You can view and modify almost anything about this trip using your tools:
-- Itinerary (days, activities, notes, costs): get_itinerary, get_day, add_activity, remove_activity, update_activity, add_note
+- Itinerary (days, activities, notes, costs): get_itinerary, get_day, add_activity, remove_activity, update_activity, add_note, set_day_title (rename a day), reorder_activities (change the order of events within a day)
 - Packing list: get_packing_list, add_packing_item, remove_packing_item
 - Flights: get_flights, update_flight
 - Hotels: get_hotels, update_hotel
@@ -108,6 +108,35 @@ const ITINERARY_TOOLS = [
             notesHe: { type: "STRING", description: "Note text in Hebrew" },
           },
           required: ["day", "notes", "notesHe"],
+        },
+      },
+      {
+        name: "set_day_title",
+        description: "Change the title/heading of a day (the location label shown for that day). Provide English and/or Hebrew — at least one.",
+        parameters: {
+          type: "OBJECT",
+          properties: {
+            day: { type: "INTEGER", description: "Day number (1-19)" },
+            title: { type: "STRING", description: "New day title in English (optional)" },
+            titleHe: { type: "STRING", description: "New day title in Hebrew (optional)" },
+          },
+          required: ["day"],
+        },
+      },
+      {
+        name: "reorder_activities",
+        description: "Reorder the activities (events) within a day. Provide the activity IDs in the desired new order. Any activities you omit are appended at the end in their current order. Call get_day first to see the current activity IDs.",
+        parameters: {
+          type: "OBJECT",
+          properties: {
+            day: { type: "INTEGER", description: "Day number (1-19)" },
+            order: {
+              type: "ARRAY",
+              items: { type: "STRING" },
+              description: "Activity IDs in the desired order, e.g. ['a17-2','a17-1','a17-4']",
+            },
+          },
+          required: ["day", "order"],
         },
       },
       {
@@ -401,6 +430,61 @@ async function handleToolCall(functionCall) {
     itinerary[dayIdx].notesHe = args.notesHe;
     await saveItineraryToDb(itinerary);
     return { result: JSON.stringify({ success: true }) };
+  }
+
+  if (name === "set_day_title") {
+    const dayIdx = itinerary.findIndex((d) => d.day === args.day);
+    if (dayIdx === -1) return { result: JSON.stringify({ error: "Day not found" }) };
+    if (!args.title && !args.titleHe) {
+      return { result: JSON.stringify({ error: "Provide title and/or titleHe" }) };
+    }
+    if (args.title) itinerary[dayIdx].location = args.title;
+    if (args.titleHe) itinerary[dayIdx].locationHe = args.titleHe;
+    await saveItineraryToDb(itinerary);
+    return {
+      result: JSON.stringify({
+        success: true,
+        day: args.day,
+        location: itinerary[dayIdx].location,
+        locationHe: itinerary[dayIdx].locationHe,
+      }),
+    };
+  }
+
+  if (name === "reorder_activities") {
+    const dayIdx = itinerary.findIndex((d) => d.day === args.day);
+    if (dayIdx === -1) return { result: JSON.stringify({ error: "Day not found" }) };
+
+    const activities = itinerary[dayIdx].activities;
+    const order = Array.isArray(args.order) ? args.order : [];
+    if (order.length === 0) {
+      return { result: JSON.stringify({ error: "Provide an 'order' array of activity IDs" }) };
+    }
+
+    const byId = new Map(activities.map((a) => [a.id, a]));
+    const reordered = [];
+    const used = new Set();
+    for (const id of order) {
+      const a = byId.get(id);
+      if (a && !used.has(id)) {
+        reordered.push(a);
+        used.add(id);
+      }
+    }
+    // Append any activities not mentioned, keeping their original order
+    for (const a of activities) {
+      if (!used.has(a.id)) reordered.push(a);
+    }
+
+    itinerary[dayIdx].activities = reordered;
+    await saveItineraryToDb(itinerary);
+    return {
+      result: JSON.stringify({
+        success: true,
+        day: args.day,
+        order: reordered.map((a) => ({ id: a.id, name: a.name })),
+      }),
+    };
   }
 
   if (name === "get_packing_list") {

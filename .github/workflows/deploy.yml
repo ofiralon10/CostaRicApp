@@ -19,6 +19,10 @@ on:
         description: 'Also clear the shared/itinerary Firestore override so the app uses the built-in itinerary'
         type: boolean
         default: false
+      deploy_functions:
+        description: 'Also deploy Cloud Functions (the AI chat backend)'
+        type: boolean
+        default: false
 
 jobs:
   build_and_deploy:
@@ -54,3 +58,14 @@ jobs:
         run: |
           npm install firebase-admin@12 --no-save
           node scripts/clear-shared-itinerary.mjs
+
+      - name: Deploy Cloud Functions (manual, optional)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_functions }}
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$RUNNER_TEMP/sa.json"
+          export GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/sa.json"
+          npm --prefix functions ci
+          npx --yes firebase-tools@latest deploy --only functions --project costaricapp-2026 --non-interactive
+          rm -f "$RUNNER_TEMP/sa.json"
