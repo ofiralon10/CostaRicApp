@@ -1,0 +1,26 @@
+name: Clear shared itinerary override
+
+# Manual-only. Clears the shared/itinerary Firestore doc so the app falls back
+# to the built-in itinerary file. Backs up the old value to the run log first.
+on:
+  workflow_dispatch:
+
+jobs:
+  clear:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install firebase-admin
+        run: npm install firebase-admin@12 --no-save
+
+      - name: Clear shared/itinerary
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: node scripts/clear-shared-itinerary.mjs
