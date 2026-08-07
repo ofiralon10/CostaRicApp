@@ -8,7 +8,6 @@ import { useAuth } from '../context/AuthContext'
 import { itinerary as defaultItinerary } from '../data/itinerary'
 import { hotels } from '../data/hotels'
 import { useSharedState } from '../hooks/useSharedState'
-import type { DayPlan } from '../data/types'
 
 export default function ItineraryPage() {
   const { t, lang } = useLang()
@@ -16,8 +15,13 @@ export default function ItineraryPage() {
   const location = useLocation()
   const scrollTarget = (location.state as { scrollTo?: number })?.scrollTo ?? null
   const [expandedDay, setExpandedDay] = useState<number | null>(scrollTarget)
-  const [storedItinerary] = useSharedState<DayPlan[] | null>('itinerary', null)
-  const itinerary = storedItinerary ?? defaultItinerary
+  // We intentionally use the built-in itinerary and do NOT read shared/itinerary.
+  // The AI chat backend (Cloud Functions) still holds a stale itinerary copy, so any
+  // AI itinerary edit overwrites shared/itinerary with outdated data (wiping the Madrid
+  // plan). Reading only the built-in file makes the displayed itinerary immune to that.
+  // Re-enable the shared read once functions are redeployed with the synced
+  // functions/itinerary.js (see CLAUDE.md → pending functions deploy).
+  const itinerary = defaultItinerary
   // Family-shared "done" state — checking off an activity syncs to everyone.
   const [doneMap, setDoneMap] = useSharedState<Record<string, boolean>>('activity-done', {})
   const dayRefs = useRef<Record<number, HTMLElement | null>>({})
