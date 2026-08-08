@@ -409,11 +409,19 @@ export const itinerary: DayPlan[] = [
     hotelId: 'h9',
     activities: [
       {
+        id: 'a17-0',
+        name: 'Morning: Royal Palace (exterior) + Sabatini Gardens + Almudena Cathedral',
+        nameHe: 'בוקר: הארמון המלכותי (מבחוץ) + גני סבטיני + קתדרלת אלמודנה',
+        description: 'Fills the time until the Teleférico opens at noon. Admire the palace facade from Plaza de Oriente / the Sabatini Gardens, then step into Almudena Cathedral (entry ~€1 donation) for its surprisingly colorful modern ceiling and the neo-Romanesque crypt. All a short walk/metro from the Teleférico.',
+        descriptionHe: 'ממלא את הזמן עד שהרכבל נפתח בצהריים. מתפעלים מחזית הארמון מכיכר אוריינטה / גני סבטיני, ואז נכנסים לקתדרלת אלמודנה (כניסה בתרומה ~€1) בשביל התקרה הצבעונית-מודרנית המפתיעה והקריפטה הניאו-רומנסקית. הכול במרחק הליכה/מטרו קצר מהרכבל.',
+        mapsUrl: 'https://maps.google.com/?q=Catedral+de+la+Almudena+Madrid',
+      },
+      {
         id: 'a17-1',
-        name: 'Teleférico cable car + Casa de Campo (morning)',
-        nameHe: 'רכבל טלפריקו + קאסה דה קמפו (בבוקר)',
-        description: 'Scenic cable car from Parque del Oeste over the city into Madrid\'s big green park. Buy ROUND-TRIP (~€6 adult) — the far end is a café/viewpoint deep in the park with no easy way onward, so ride both ways for the views. ~11 min each way; go in the morning while cooler',
-        descriptionHe: 'רכבל נופי מפארק דל אאסטה מעל העיר אל הפארק הירוק הגדול של מדריד. קונים כרטיס הלוך-ושוב (כ-6€ למבוגר) — התחנה הרחוקה היא בית קפה/תצפית עמוק בתוך הפארק בלי דרך נוחה להמשיך, אז נוסעים לשני הכיוונים בשביל הנוף. כ-11 דק׳ לכיוון; עדיף בבוקר כשקריר',
+        name: 'Teleférico cable car + Casa de Campo (opens 12:00)',
+        nameHe: 'רכבל טלפריקו + קאסה דה קמפו (נפתח ב-12:00)',
+        description: 'Summer hours 12:00–21:00, so do the palace/Almudena stop first. Scenic cable car from Parque del Oeste over the city into Madrid\'s big green park. Buy ROUND-TRIP (~€6 adult) — the far end is a café/viewpoint deep in the park with no easy way onward, so ride both ways for the views. ~11 min each way.',
+        descriptionHe: 'שעות קיץ 12:00–21:00, אז קודם עוצרים בארמון/אלמודנה. רכבל נופי מפארק דל אאסטה מעל העיר אל הפארק הירוק הגדול של מדריד. קונים כרטיס הלוך-ושוב (כ-6€ למבוגר) — התחנה הרחוקה היא בית קפה/תצפית עמוק בתוך הפארק בלי דרך נוחה להמשיך, אז נוסעים לשני הכיוונים בשביל הנוף. כ-11 דק׳ לכיוון.',
         mapsUrl: 'https://maps.google.com/?q=Teleférico+de+Madrid',
       },
       {
@@ -449,8 +457,8 @@ export const itinerary: DayPlan[] = [
         mapsUrl: 'https://maps.google.com/?q=Azotea+Circulo+de+Bellas+Artes',
       },
     ],
-    notes: 'Getting around: the Teleférico is on the west side (Pintor Rosales, by Templo de Debod); Ikono is south near Atocha/Reina Sofía — hop the metro between them (~20 min). Book Ikono online ahead. Lunch near Ikono: tapas at Mercado de Antón Martín or in La Latina. Use the midday heat as an excuse for AC (Ikono / the optional Prado) and save Retiro for the cooler evening.',
-    notesHe: 'תנועה בעיר: הרכבל נמצא בצד המערבי (פינטור רוסאלס, ליד מקדש דבוד); איקונו בדרום ליד אטוצ׳ה/ריינה סופיה — נוסעים במטרו ביניהם (כ-20 דק׳). כדאי להזמין איקונו מראש אונליין. צהריים ליד איקונו: טאפאס בשוק אנטון מרטין או בלה לטינה. מנצלים את חום הצהריים בשביל מיזוג (איקונו / פראדו האופציונלי) ושומרים את רטירו לערב הקריר.',
+    notes: 'Timing: the Teleférico opens at 12:00 (summer), so start with the Royal Palace exterior / Sabatini Gardens / Almudena Cathedral, then ride the Teleférico at noon. Book Ikono online for ~15:00 (leaves buffer for the cable car + lunch; Ikono is open until 22:00). Getting around: Teleférico is west (Pintor Rosales, by Templo de Debod); Ikono is south near Atocha/Reina Sofía — hop the metro between them (~20 min). Lunch near Ikono: tapas at Mercado de Antón Martín or in La Latina. Use the midday heat as an excuse for AC (Ikono / the optional Prado) and save Retiro for the cooler evening.',
+    notesHe: 'תזמון: הרכבל נפתח ב-12:00 (קיץ), אז מתחילים בארמון המלכותי מבחוץ / גני סבטיני / קתדרלת אלמודנה, ואז עולים לרכבל בצהריים. כדאי להזמין את איקונו אונליין ל-15:00 בערך (משאיר באפר לרכבל ולצהריים; איקונו פתוח עד 22:00). תנועה בעיר: הרכבל במערב (פינטור רוסאלס, ליד מקדש דבוד); איקונו בדרום ליד אטוצ׳ה/ריינה סופיה — נוסעים במטרו ביניהם (כ-20 דק׳). צהריים ליד איקונו: טאפאס בשוק אנטון מרטין או בלה לטינה. מנצלים את חום הצהריים בשביל מיזוג (איקונו / פראדו האופציונלי) ושומרים את רטירו לערב הקריר.',
   },
   {
     day: 18,
