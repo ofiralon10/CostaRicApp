@@ -424,8 +424,6 @@ export const itinerary: DayPlan[] = [
         descriptionHe: 'הרכבל (טלפריקו) סגור מ-2022 לשיפוץ מלא (ייפתח ~סוף 2026/2027) — מדלגים עליו. לנוף במקום: הליכה ~10 דק׳ לפלאסה דה אספניה ועלייה לגג ה-360° של ריו פלאסה אספניה, או מגדל התצפית Faro de Moncloa.',
         mapsUrl: 'https://maps.google.com/?q=RIU+Plaza+España+Madrid+rooftop',
       },
-        mapsUrl: 'https://maps.google.com/?q=Teleférico+de+Madrid',
-      },
       {
         id: 'a17-2',
         name: 'Ikono immersive experience',
