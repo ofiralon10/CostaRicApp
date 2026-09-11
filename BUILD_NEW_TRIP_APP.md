@@ -533,6 +533,49 @@ to click.
 
 ---
 
+## PART L — Values to replace (find-&-replace map)
+
+The source you receive still contains the **original project's** identifiers and the previous
+family's details. Replace every one of them with **your own** before shipping. None of the
+original secret values are printed here — get each from your own console (Part B–C).
+
+> ⚠️ **Privacy:** the original data files also contain the previous family's **email addresses**
+> and **booking confirmation numbers** (e.g. in itinerary `notes`). Scrub these — they're
+> personal data, not config.
+
+| # | What | Where (file) | Replace with |
+|---|------|--------------|--------------|
+| 1 | Firebase web config: `apiKey`, `authDomain`, `projectId`, `storageBucket`, `messagingSenderId`, `appId` | `src/firebase.ts` **and** `public/firebase-messaging-sw.js` (must match) | Your Firebase Web App config (Part B2) |
+| 2 | Functions region | `src/firebase.ts` → `getFunctions(app, '<region>')` | Keep `us-central1` unless you deploy elsewhere |
+| 3 | Firebase **project id** | `.firebaserc` → `projects.default`; `.github/workflows/deploy.yml` → `projectId`; also appears inside #1 | `<your-project-id>` |
+| 4 | **VAPID public key** (Web Push) | `src/hooks/useNotifications.ts` → `VAPID_KEY` | Your key from Firebase → Cloud Messaging → Web Push certificates (Part C6) |
+| 5 | **Gemini API key** — runtime chat/awards | *Not in code.* Functions secret | `firebase functions:secrets:set GEMINI_API_KEY` (Part C4) |
+| 6 | **Gemini API key** — local image scripts | Passed at runtime via `x-goog-api-key` header in your generation script (Part E) | Your key, kept out of source control |
+| 7 | **Family members, emails, roles, avatars** | `src/context/AuthContext.tsx` → `familyMembers`; check for a duplicate list in `src/pages/AwardsPage.tsx` (`FAMILY`) and any other hard-coded member arrays | Your family (Part C1) |
+| 8 | App **version** string | `src/version.ts` → `APP_VERSION` | Bump every deploy |
+| 9 | App **name / title / theme color** | `index.html` (`<title>`), `public/manifest.json`, `src/components/Layout.tsx` (header), `src/index.css` (theme vars) | Your branding (Part D1) |
+| 10 | Countdown **dates** (frontend) | `src/pages/HomePage.tsx` → `DEPARTURE`, `TRIP_END` | Your trip's start/end ISO datetimes |
+| 11 | Countdown **dates / timezone / copy** (push) | `functions/index.js` → `dailyCountdown` inline constants | Your dates + TZ + translated text (Part C5) |
+| 12 | Home **nav grid** + any date-gated cards | `src/pages/HomePage.tsx` → `NAV_CARDS`, dismissible-card constants | Your sections |
+| 13 | **CI service-account** key | GitHub repo secret `FIREBASE_SERVICE_ACCOUNT`; branch names + `projectId` in `.github/workflows/deploy.yml` | Your SA JSON + repo/branch (Part H2) |
+| 14 | **Trip data** (flights, hotels, itinerary, destinations, emergency, budget, games, phrasebook) + server copies (`functions/itinerary.js`, `functions/hotels.js`, `DEFAULT_FLIGHTS`) | `src/data/*`, `functions/*` | Your trip (Part D) |
+| 15 | **Images & audio** | `public/images/*`, `public/audio/*` | Regenerate; keep the exact filenames the code references (Parts E–F) |
+
+**Catch stray leftovers** — after editing, search the repo for any remaining references to the
+*previous* project id, the *previous* family emails, and the *previous* VAPID key, and confirm
+zero hits outside your own new values:
+
+```bash
+# replace the search terms with the OLD project id / an OLD email / the OLD vapid prefix you see in the code:
+grep -rn "<old-project-id>"  src public functions .firebaserc .github
+grep -rn "<an-old-email>"    src public functions
+grep -rn "<old-vapid-prefix>" src
+```
+
+A clean result means nothing from the original deployment is still wired in.
+
+---
+
 *Generated to accompany the Costa Rica Family Trip App source code. The code is generic; swap in
 your data (Part D), your Firebase project (Parts B–C), and your images (Part E), and you have a
 brand-new trip companion app.*
